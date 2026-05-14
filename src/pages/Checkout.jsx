@@ -1,7 +1,8 @@
-import { ArrowLeft, CheckCircle2, MapPin, MoreHorizontal, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, MapPin, MoreHorizontal, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VerificationModal from '../components/VerificationModal.jsx';
+import { Avatar, VerifiedName } from '../components/common';
 import logo from '../assets/logo.png';
 import zoya from '../assets/zoya.png';
 
@@ -10,88 +11,103 @@ const Checkout = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="relative mx-auto w-full max-w-[800px]">
-      <div className="mb-10 flex items-center justify-between">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-3 bg-transparent text-base font-semibold text-text-dark">
-          <ArrowLeft size={24} />
-          Back
-        </button>
-        <img src={logo} alt="partywitty" className="h-auto max-w-[160px]" />
-      </div>
+    <div className="fixed inset-0 overflow-y-auto bg-gradient-to-br from-[#E2DDF5] via-[#EAEAE8] to-[#E2ECD5]">
+      <div className="relative mx-auto w-full max-w-[800px] px-6 py-10 pb-40">
+        
+        {/* Header */}
+        <div className="mb-10 flex items-center justify-between">
+          <button onClick={() => navigate(-1)} className="flex items-center gap-3 bg-transparent text-[18px] font-bold text-[#1A1A1A]">
+            <ArrowLeft size={24} strokeWidth={2.5} />
+            Back
+          </button>
+          <img src={logo} alt="partywitty" className="h-7 w-auto object-contain" />
+        </div>
 
-      <div className="rounded-[32px] border border-border-soft bg-panel-bg p-10 shadow-card">
-        <div className="mb-10 flex flex-wrap items-start justify-between gap-6">
-          <div>
-            <div className="mb-5 flex items-center gap-3 text-2xl font-bold text-text-dark">
-              Illusion <span className="text-lg text-[#FBBF24]">★ 4.1</span>
-              <span className="text-[15px] font-medium text-text-muted underline">Review (03)</span>
-            </div>
-            <div className="flex items-center gap-5">
-              <img src={zoya} className="h-10 w-10 rounded-full object-cover" alt="Zoe" />
-              <div>
-                <div className="mb-1.5 flex items-center gap-1.5 text-xl font-bold text-text-dark">
-                  Zoe Miller, 22 <CheckCircle2 size={20} className="text-verified-purple" />
-                </div>
-                <div className="mb-1.5 text-[15px] font-medium text-text-muted">Nocturne Rooftop</div>
-                <div className="flex items-center gap-1.5 text-[13px] font-medium text-text-muted">
-                  <MapPin size={14} />
-                  Sector 38, Entertainment City - 13 km
+        {/* Main Card */}
+        <div className="rounded-[32px] bg-[#F4F4F4] p-8 shadow-sm">
+          
+          {/* Illusion Section */}
+          <div className="mb-8 flex items-start justify-between">
+            <div>
+              <div className="mb-6 flex items-center gap-2.5 text-[22px] font-bold text-[#1A1A1A]">
+                Illusion 
+                <span className="text-[17px] text-[#FBBF24]">★</span>
+                <span className="text-[17px] font-bold">4.1</span>
+                <span className="text-[15px] font-bold text-[#1A1A1A] underline decoration-2 underline-offset-4 ml-1">Review</span>
+                <span className="text-[15px] font-bold text-[#1A1A1A]">(03)</span>
+              </div>
+              <div className="flex items-start gap-4">
+                <Avatar src={zoya} alt="Zoe" size="xl" />
+                <div className="pt-1">
+                  <VerifiedName name="Zoe Miller" age="22" className="mb-1 text-[20px]" iconSize={18} />
+                  <div className="mb-2 text-[15px] font-bold text-[#4A4A4A]">Nocturne Rooftop</div>
+                  <div className="flex items-center gap-2 text-[13px] font-medium text-[#71717A]">
+                    <MapPin size={15} strokeWidth={2} />
+                    Sector 38, Entertainment City • 13 km
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="flex flex-col items-center justify-center rounded-[16px] bg-[#E8E8E8] px-4 py-3">
+              <div className="text-[12px] font-extrabold uppercase tracking-widest text-[#71717A]">OCT</div>
+              <div className="mt-0.5 text-[22px] font-black text-[#1A1A1A]">24</div>
+            </div>
           </div>
-          <div className="rounded-[20px] bg-gray-100 px-5 py-4 text-center">
-            <div className="text-[13px] font-bold tracking-wide text-text-muted">OCT</div>
-            <div className="text-2xl font-bold text-text-dark">24</div>
-          </div>
-        </div>
 
-        <div className="mb-5 flex items-center justify-between text-base font-bold text-text-dark">
-          <div>Tickets Price</div>
-          <div>₹59.00</div>
-        </div>
-
-        <div className="mb-10 flex items-center gap-6 rounded-[24px] border border-border-soft bg-gray-50 p-6">
-          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=150" className="h-20 w-20 rounded-full object-cover" alt="Drink" />
-          <div className="flex-1">
-            <div className="mb-1.5 text-xl font-bold text-text-dark">Wine Glass</div>
-            <div className="mb-3 text-[15px] font-medium text-text-muted">Mint, Lime, Electric Glow</div>
-            <div className="inline-block rounded-lg bg-green-100 px-4 py-2 text-[13px] font-semibold text-green-800">You only pay for the drink if they accept your invite</div>
-          </div>
-          <div className="text-2xl font-bold text-text-dark">₹2199</div>
-        </div>
-
-        <div className="mb-10 border-t border-border-soft pt-8">
-          <h3 className="mb-5 text-lg font-bold text-text-dark">Bill Details</h3>
-          <div className="mb-4 flex justify-between text-[15px] font-medium text-text-muted">
-            <div>Tickets Amount</div>
+          {/* Tickets Price */}
+          <div className="mb-6 flex items-center justify-between text-[16px] font-bold text-[#1A1A1A]">
+            <div>Tickets Price</div>
             <div>₹59.00</div>
           </div>
-          <div className="mb-5 flex justify-between text-[15px] font-medium text-verified-purple underline">
-            <div>Platform & Other Charges</div>
-            <div>₹5.90</div>
+
+          {/* Drink Card */}
+          <div className="mb-8 flex items-center gap-6 rounded-[24px] bg-white p-5 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=150" className="h-[90px] w-[90px] rounded-full object-cover" alt="Drink" />
+            <div className="flex-1">
+              <div className="mb-1 text-[20px] font-bold text-[#1A1A1A]">Wine Glass</div>
+              <div className="mb-3 text-[14px] font-medium text-[#71717A]">Mint, Lime, Electric Glow</div>
+              <div className="inline-block rounded-[8px] bg-[#D1F4E0] px-3 py-1.5 text-[12px] font-bold text-[#4ADE80]">
+                You only pay for the drink if they accept your invite
+              </div>
+            </div>
+            <div className="text-[18px] font-bold text-[#1A1A1A] pr-2">₹2199</div>
           </div>
-          <div className="flex justify-between text-xl font-bold text-text-dark">
-            <div>Grand Total</div>
-            <div>₹64.90</div>
+
+          {/* Bill Details */}
+          <div>
+            <h3 className="mb-5 text-[16px] font-bold text-[#1A1A1A]">Bill Details</h3>
+            <div className="mb-4 flex justify-between text-[14px] font-bold text-[#4A4A4A]">
+              <div>Tickets Amount</div>
+              <div className="text-[#1A1A1A]">₹59</div>
+            </div>
+            <div className="mb-5 flex justify-between text-[14px] font-bold text-[#7C4DFF]">
+              <div className="underline decoration-1 underline-offset-4">Platform & Other Charges</div>
+              <div>₹5.90</div>
+            </div>
+            <div className="flex justify-between text-[17px] font-bold text-[#1A1A1A]">
+              <div>Grand Total</div>
+              <div>₹64.90</div>
+            </div>
           </div>
         </div>
 
-        <div className="mb-12 flex items-center gap-4">
-          <input type="checkbox" id="terms" className="h-6 w-6 accent-verified-purple" />
-          <label htmlFor="terms" className="cursor-pointer text-[15px] font-medium text-text-muted">
-            I agree to the <span className="font-semibold text-verified-purple">Terms of Service</span> and <span className="font-semibold text-verified-purple">Privacy Policy</span>.
+        {/* Checkbox */}
+        <div className="mt-6 flex items-center gap-3 px-2">
+          <div className="flex h-5 w-5 items-center justify-center rounded-[4px] border-[1.5px] border-[#7C4DFF] bg-transparent"></div>
+          <label className="text-[14px] font-bold text-[#1A1A1A]">
+            I agree to the <span className="text-[#7C4DFF] hover:underline cursor-pointer">Terms of Service</span> and <span className="text-[#7C4DFF] hover:underline cursor-pointer">Privacy Policy.</span>
           </label>
         </div>
 
-        <div className="flex justify-center gap-5">
-          <button className="flex h-16 w-16 items-center justify-center rounded-full border border-border-soft bg-white shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
-            <ShieldCheck size={28} className="text-verified-purple" />
+        {/* Floating Bottom Bar */}
+        <div className="fixed bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white p-2 shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
+          <button className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border-2 border-[#7C4DFF] bg-white text-[#7C4DFF] transition-transform hover:scale-105">
+            <ShieldCheck size={24} strokeWidth={2.5} />
           </button>
-          <button className="flex h-16 w-16 items-center justify-center rounded-full bg-verified-purple text-white shadow-[0_4px_12px_rgba(124,77,255,0.3)]">
-            <MoreHorizontal size={28} />
+          <button className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-[#7C4DFF] text-white transition-transform hover:scale-105">
+            <MoreHorizontal size={24} strokeWidth={2.5} />
           </button>
-          <button onClick={() => setShowModal(true)} className="max-w-[400px] flex-1 rounded-full bg-[image:var(--secondary-gradient)] px-8 text-lg font-bold text-white shadow-[0_8px_24px_rgba(124,77,255,0.3)]">
+          <button onClick={() => setShowModal(true)} className="flex h-[46px] min-w-[200px] items-center justify-center rounded-full bg-[#7C4DFF] px-8 text-[15px] font-bold text-white transition-transform hover:scale-105">
             Make The Move Now
           </button>
         </div>

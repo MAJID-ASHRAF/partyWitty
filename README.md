@@ -64,7 +64,8 @@ Runs ESLint checks for the project.
 ```text
 src/
   assets/       Static images and SVG/icon assets
-  components/   Reusable UI components
+  components/   Layout and reusable UI components
+    common/     Shared buttons, avatars, verified labels, and form controls
   pages/        Route-level screens
   App.jsx       Application routes/layout
   main.jsx      React entry point

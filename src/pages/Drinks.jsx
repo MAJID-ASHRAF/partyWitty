@@ -1,5 +1,6 @@
-import { CheckCircle2, Clock, Edit2, Flower2, Gift, Hand, MapPin } from 'lucide-react';
+import { Clock, Edit2, Flower2, Gift, Hand, MapPin, BadgeCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Avatar, GradientButton, VerifiedName } from '../components/common';
 import Profile from '../assets/Profile.png';
 import bar from '../assets/bar.png';
 import hotel from '../assets/hotel.png';
@@ -21,35 +22,49 @@ const Drinks = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-full max-w-[1200px] flex-col gap-8 xl:flex-row xl:flex-wrap xl:gap-12">
+  
+
+   
+    <div className="flex w-full flex-col items-center">
+      <div className="flex w-full max-w-[1200px] flex-col gap-8 xl:flex-row xl:flex-wrap xl:gap-12">
       <aside className="mx-auto w-full max-w-[360px]">
         <div className="mb-8 flex items-center gap-4">
-          <img src={Profile} className="h-14 w-14 rounded-full object-cover" alt="Alen" />
+          <Avatar src={Profile} alt="Alen" size="lg" />
           <div>
             <div className="text-lg font-bold text-text-dark">Alen Markram</div>
-            <div className="mt-1.5 inline-block rounded-full bg-[image:var(--primary-gradient)] px-4 py-1.5 text-xs font-semibold text-white">Get Verified</div>
+            <GradientButton className="mt-1.5 px-4 py-1.5 text-xs">Get Verified</GradientButton>
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-[32px] border border-border-soft bg-panel-bg shadow-card">
-          <img src={hotel} alt="Venue" className="h-[240px] w-full object-cover" />
-          <div className="relative -mt-12 px-6 pb-6 pt-8">
-            <div className="mb-8 flex items-center gap-4">
-              <img src={zoya} className="h-16 w-16 rounded-full border-4 border-white shadow-[0_4px_12px_rgba(0,0,0,0.1)]" alt="Zoe" />
-              <div>
-                <div className="flex items-center gap-1.5 text-xl font-bold text-text-dark">
-                  Zoe Miller, 22 <CheckCircle2 size={20} className="text-verified-purple" />
+        <div className="overflow-hidden rounded-[32px] bg-[#EAE8E1] shadow-sm">
+          {/* Top section with image and overlay */}
+          <div className="relative h-[360px] w-full">
+            <img src={hotel} alt="Venue" className="h-full w-full object-cover" />
+            {/* Gradient overlay for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#000000cc] via-[#00000040] to-transparent"></div>
+            
+            {/* Avatar and Info overlay */}
+            <div className="absolute bottom-5 left-5 flex items-center gap-4">
+              <Avatar src={zoya} alt="Zoe" size="lg" className="border-[1.5px] border-white/20 shadow-sm" />
+              <div className="flex flex-col gap-0.5">
+                <div className="flex items-center gap-2 text-[18px] font-bold text-white">
+                  Zoe Miller, 22
+                  <BadgeCheck size={26} className="text-white" strokeWidth={2.5} />
                 </div>
-                <div className="text-sm font-medium text-text-muted">Nocturne Rooftop</div>
+                <div className="text-[14px] font-bold text-white">Nocturne Rooftop</div>
               </div>
             </div>
-            <div className="mb-5 flex gap-4 text-text-muted">
-              <MapPin size={22} />
-              <div className="text-[15px] font-medium">Sector 38, Noida at ILLUSION</div>
+          </div>
+
+          {/* Bottom section with details */}
+          <div className="flex flex-col gap-5 p-6 pb-7">
+            <div className="flex items-center gap-4 text-[#333333]">
+              <MapPin size={28} strokeWidth={1.5} />
+              <div className="text-[14px] font-medium text-[#4A4A4A]">Sector 38, Noida at ILLUSION</div>
             </div>
-            <div className="flex gap-4 text-text-muted">
-              <Clock size={22} />
-              <div className="text-[15px] font-medium">Tonight, 10:30 PM -</div>
+            <div className="flex items-center gap-4 text-[#333333]">
+              <Clock size={28} strokeWidth={1.5} />
+              <div className="text-[14px] font-medium text-[#4A4A4A]">Tonight, 10:30 PM -</div>
             </div>
           </div>
         </div>
@@ -111,8 +126,19 @@ const Drinks = () => {
             </button>
           </div>
         </div>
+
+       
       </section>
+      </div>
+
+      <div className="mt-8 mb-4 flex justify-center">
+        <button  onClick={() => navigate('/checkout')} className="rounded-full border-[5px] border-white bg-[#7C4DFF] px-14 py-3 text-[17px] font-bold text-white shadow-lg transition-transform hover:-translate-y-1">
+          Make The Move Now
+        </button>
+      </div>
     </div>
+
+  
   );
 };
 

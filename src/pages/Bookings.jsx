@@ -1,12 +1,13 @@
-import { CheckCircle2, ChevronDown, MapPin, Mic, Search } from 'lucide-react';
+import { CheckCircle2, ChevronDown, MapPin, Mic, Search, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { Avatar, GradientButton } from '../components/common';
 import Profile from '../assets/Profile.png';
 import drinking from '../assets/drinking.png';
 import friends from '../assets/friends.png';
 import party from '../assets/party.png';
 import zoya from '../assets/zoya.png';
 
-const events = [party, drinking, friends].map((image, index) => ({
+const events = [drinking, party, friends].map((image, index) => ({
   id: index + 1,
   image,
   venue: 'PRISM NIGHTCLUB',
@@ -16,95 +17,129 @@ const events = [party, drinking, friends].map((image, index) => ({
   time: '10:00 PM onwards',
   note: 'Zoya has been here twice',
   location: 'Nocturne Rooftop',
-  address: 'Sector 38, Entertainment City - 13 km',
-  discount: '36% OFF F&B',
+  address: 'Sector 38, Entertainment City  -  13 km',
+  discount: '36% OFF  F&B',
 }));
 
-const Events = () => {
+const circleImages = [zoya, Profile, zoya, Profile];
+
+const BookingCard = ({ event, onClick }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="overflow-hidden rounded-[22px] bg-white text-left shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-transform hover:-translate-y-1"
+  >
+    <div className="relative h-[350px] w-full">
+      <img src={event.image} alt={event.name} className="h-full w-full rounded-t-[22px] object-cover" />
+
+      <div className="absolute left-5 top-4 rounded-full bg-green-500/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-green-500 backdrop-blur-md">
+        Happening Now
+      </div>
+      <div className="absolute right-4 top-4 rounded-full bg-black/35 px-3 py-1.5 text-[10px] font-semibold text-white backdrop-blur-md">
+        Vibe Matches
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent px-5 pb-8 pt-24 text-white">
+        <div className="mb-1 text-[12px] font-semibold uppercase tracking-[0.18em] text-white/90">{event.venue}</div>
+        <div className="flex items-end justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-2">
+            <h3 className="text-[27px] font-extrabold leading-none">{event.name}</h3>
+            <span className="inline-flex h-7 items-center gap-1 rounded-full bg-[#323338] px-2.5 text-[12px] font-bold text-white">
+              <Star size={13} className="fill-[#FBBF24] text-[#FBBF24]" />
+              {event.rating}
+            </span>
+          </div>
+          <div className="shrink-0 text-right text-[13px] font-medium leading-tight">
+            <div>{event.day}</div>
+            <div>{event.time}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute -bottom-4 left-1/2 z-10 inline-flex h-8 max-w-[calc(100%-48px)] -translate-x-1/2 items-center gap-2 rounded-full bg-[image:var(--primary-gradient)] px-3 pr-4 text-[12px] font-semibold text-white shadow-[0_8px_18px_rgba(225,48,108,0.25)]">
+        <img src={zoya} className="h-5 w-5 shrink-0 rounded-full object-cover" alt="" />
+        <span className="min-w-0 truncate">{event.note}</span>
+      </div>
+    </div>
+
+    <div className="bg-transparent px-5 pb-5 pt-8">
+      <div className="mb-4 flex items-start justify-between gap-4">
+        <div className="flex min-w-0 gap-3">
+          <MapPin size={21} className="mt-0.5 shrink-0 text-text-muted" />
+          <div className="min-w-0">
+            <div className="mb-1 text-[14px] font-extrabold leading-tight text-text-dark">{event.location}</div>
+            <div className="truncate text-[12px] font-medium leading-tight text-text-muted">{event.address}</div>
+          </div>
+        </div>
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100/80">
+          <ChevronDown size={17} className="text-text-muted" />
+        </span>
+      </div>
+
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center">
+          <div className="flex -space-x-2.5">
+            {circleImages.map((image, index) => (
+              <img key={`${image}-${index}`} src={image} alt="" className="h-8 w-8 rounded-full border-2 border-white object-cover" />
+            ))}
+          </div>
+          <span className="-ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-border-soft bg-white text-[13px] font-bold text-text-dark shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
+            22+
+          </span>
+          <span className="ml-2 whitespace-nowrap text-[12px] font-medium text-text-muted">Your Circle</span>
+        </div>
+        <div className="shrink-0 whitespace-nowrap text-[16px] font-extrabold tracking-[0.04em] text-green-600">{event.discount}</div>
+      </div>
+    </div>
+  </button>
+);
+
+const Bookings = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="mx-auto w-full max-w-[1200px]">
-      <div className="mb-8 text-sm font-medium text-text-muted">
-        Home / Party Package / <span className="font-semibold text-text-dark">Selected item</span>
+    <div className="mx-auto w-full max-w-[1180px]">
+      <div className="mb-5 text-[12px] font-medium text-text-muted">
+        Home / Party Package / <span className="font-bold text-text-dark">Selected item</span>
       </div>
 
-      <div className="mb-12 flex flex-wrap items-center justify-between gap-6">
-        <div className="flex flex-auto items-center gap-4 rounded-full border border-border-soft bg-panel-bg px-6 py-3 shadow-[0_4px_12px_rgba(0,0,0,0.03)]">
-          <div className="text-[15px] font-semibold">Pick a plan you'd both enjoy</div>
-          <div className="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2">
-            <img src={zoya} className="h-7 w-7 rounded-full" alt="Zoe" />
-            <span className="text-sm font-semibold">Zoe Miller, 22</span>
-            <CheckCircle2 size={16} className="text-verified-purple" />
+      <div className="mb-8 flex items-center justify-between gap-7">
+        <div className="flex min-h-[92px] flex-1 flex-col justify-center rounded-[22px] bg-white/45 px-6">
+          <div className="mb-3 text-[16px] font-extrabold text-text-dark">Pick a plan you'd both enjoy</div>
+          <div className="flex items-center gap-3">
+            <Avatar src={zoya} alt="Zoe" size="md" />
+            <div className="flex items-center gap-2 text-[15px] font-extrabold text-text-dark">
+              Zoe Miller, 22
+              <CheckCircle2 size={17} className="text-verified-purple" />
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="text-right">
-            <div className="text-[15px] font-bold">Alen Markram</div>
-            <div className="mt-1 inline-block rounded-full bg-[image:var(--primary-gradient)] px-3 py-1 text-xs font-semibold text-white">Get Verified</div>
+
+        <div className="flex shrink-0 items-center gap-4">
+          <Avatar src={Profile} alt="Alen" size="xl" className=" shadow-[0_4px_14px_rgba(61,28,255,0.22)]" />
+          <div>
+            <div className="mb-2 text-[18px] font-medium text-text-dark">Alen Markram</div>
+            <GradientButton className="h-8 px-4 text-[13px]">Get Verified</GradientButton>
           </div>
-          <img src={Profile} className="h-14 w-14 rounded-full object-cover" alt="Alen" />
         </div>
       </div>
 
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-[28px] font-bold text-text-dark">Tonight near you</h2>
-        <div className="flex w-full max-w-[320px] items-center gap-3 rounded-full border border-border-soft bg-white px-6 py-3">
-          <Search size={20} className="shrink-0 text-text-muted" />
-          <input type="text" placeholder="Search.." className="w-full border-0 bg-transparent text-[15px] outline-none placeholder:text-text-muted" />
-          <Mic size={20} className="shrink-0 text-text-muted" />
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <h2 className="text-[25px] font-medium text-text-dark">Tonight near you</h2>
+        <div className="flex h-11 w-full max-w-[280px] items-center gap-3 rounded-full bg-white/45 px-5">
+          <Search size={18} className="shrink-0 text-black" />
+          <input type="text" placeholder="Search..." className="min-w-0 flex-1 bg-transparent text-[13px] font-semibold outline-none placeholder:text-black" />
+          <Mic size={18} className="shrink-0 text-black" />
         </div>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(340px,1fr))] gap-8">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
         {events.map((event) => (
-          <button key={event.id} onClick={() => navigate('/drinks')} className="overflow-hidden rounded-[32px] border border-border-soft bg-panel-bg text-left shadow-card transition-transform hover:-translate-y-1">
-            <div className="relative h-[280px] w-full">
-              <img src={event.image} alt={event.name} className="h-full w-full object-cover" />
-              <div className="absolute left-5 top-5 rounded-full bg-green-500/20 px-4 py-1.5 text-[11px] font-bold tracking-wide text-green-400 backdrop-blur-md">HAPPENING NOW</div>
-              <div className="absolute right-5 top-5 rounded-full bg-white/20 px-4 py-1.5 text-[11px] font-semibold text-white backdrop-blur-md">Vibe Matches</div>
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent px-6 pb-6 pt-10 text-white">
-                <div className="mb-2 text-xs font-semibold tracking-wide opacity-90">{event.venue}</div>
-                <div className="flex items-end justify-between">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-[32px] font-bold">{event.name}</h3>
-                    <span className="rounded-lg bg-amber-400 px-2 py-1 text-[13px] font-bold text-gray-900">★ {event.rating}</span>
-                  </div>
-                  <div className="text-right text-[13px] font-medium">
-                    <div>{event.day}</div>
-                    <div className="opacity-90">{event.time}</div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-5 left-12 right-12 z-10 inline-flex items-center gap-2 rounded-full bg-[image:var(--primary-gradient)] px-4 py-2 text-[13px] font-semibold text-pink-50 shadow-[0_4px_12px_rgba(225,48,108,0.15)]">
-                <img src={zoya} className="h-5 w-5 rounded-full" alt="Zoya" />
-                {event.note}
-              </div>
-            </div>
-
-            <div className="p-6">
-              <div className="mb-6 flex items-start justify-between pt-2">
-                <div className="flex gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
-                    <MapPin size={20} className="text-text-muted" />
-                  </div>
-                  <div>
-                    <div className="mb-1 text-base font-bold text-text-dark">{event.location}</div>
-                    <div className="text-[13px] text-text-muted">{event.address}</div>
-                  </div>
-                </div>
-                <ChevronDown size={24} className="text-text-muted" />
-              </div>
-              <div className="flex items-center justify-between border-t border-border-soft pt-5">
-                <span className="text-[13px] font-medium text-text-muted">Your Circle</span>
-                <div className="text-[15px] font-bold text-success-green">{event.discount}</div>
-              </div>
-            </div>
-          </button>
+          <BookingCard key={event.id} event={event} onClick={() => navigate('/drinks')} />
         ))}
       </div>
     </div>
   );
 };
 
-export default Events;
+export default Bookings;

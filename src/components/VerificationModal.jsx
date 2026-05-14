@@ -17,7 +17,7 @@ const VerificationModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 p-4 backdrop-blur">
-      <div className={['relative max-h-[90vh] w-full overflow-y-auto rounded-[32px] bg-white shadow-[0_24px_48px_rgba(0,0,0,0.1)]', step === 'photos' ? 'max-w-[640px]' : 'max-w-[520px]', step === 'scan' ? 'p-6' : 'p-12'].join(' ')}>
+      <div className={['relative max-h-[90vh] w-full overflow-y-auto rounded-[32px] bg-white shadow-[0_24px_48px_rgba(0,0,0,0.1)]', step === 'photos' ? 'max-w-[650px]' : 'max-w-[520px]', step === 'scan' ? 'p-6' : 'p-12'].join(' ')}>
         <button onClick={onClose} className="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-text-muted transition-colors hover:bg-gray-200">
           <X size={24} />
         </button>
@@ -57,24 +57,6 @@ const VerificationModal = ({ isOpen, onClose }) => {
         {step === 'scan' && (
           <div className="relative h-[540px] w-full overflow-hidden rounded-[24px] bg-black">
             <img src={FaceScan} alt="Face Scan" className="h-full w-full object-cover opacity-80" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative h-[340px] w-[260px] rounded-[130px] border-4 border-white/60">
-                <div className="absolute left-1/2 top-12 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/25 px-5 py-2.5 text-[15px] font-semibold text-white backdrop-blur-md">Look straight</div>
-              </div>
-            </div>
-            <div className="absolute bottom-[120px] left-0 right-0 text-center text-white">
-              <h3 className="mb-2 text-lg font-bold">Keep your face within the frame</h3>
-              <p className="text-sm font-medium opacity-90">Center your face and wait for the scan to start</p>
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2.5 text-[13px] font-semibold backdrop-blur-md">
-                <ShieldCheck size={18} />
-                Used only for verification
-              </div>
-            </div>
-            <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-10">
-              <button className="flex h-14 w-14 items-center justify-center rounded-full border border-white/40 text-white"><RefreshCcw size={24} /></button>
-              <button onClick={() => setStep('verified')} className="flex h-[72px] w-[72px] items-center justify-center rounded-full border-4 border-white"><div className="h-14 w-14 rounded-full bg-white" /></button>
-              <button className="flex h-14 w-14 items-center justify-center rounded-full border border-white/40 text-white"><Sun size={24} /></button>
-            </div>
           </div>
         )}
 

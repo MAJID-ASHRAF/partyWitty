@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowUpRight, Bookmark, Crown, ListFilter } from 'lucide-react';
+import { Avatar } from './common';
 import { PlanIcon, BidIcon, BookingIcon, SearchIcon, ChatIcon, BellIcon, RewardIcon } from '../assets/sidebar-icons';
 
 import Profile from '../assets/Profile.png';
@@ -11,7 +12,7 @@ import subscription from '../assets/subscription.png';
 const navItems = [
   { icon: PlanIcon, label: 'My Plan', path: '/' },
   { icon: BidIcon, label: 'My Bids', path: '/bids' },
-  { icon: BookingIcon, label: 'My Booking', path: '/events' },
+  { icon: BookingIcon, label: 'My Booking', path: '/booking' },
   { icon: SearchIcon, label: 'Search', path: '/drinks' },
   { icon: ChatIcon, label: 'Chat Room', path: '/chat' },
   { icon: BellIcon, label: 'Notifications', path: '/notifications' },
@@ -101,12 +102,11 @@ const Sidebar = () => {
         </div>
 
         <div className={['flex items-center gap-3', isCollapsed ? 'mt-0 justify-center' : 'mt-4 justify-start'].join(' ')}>
-          <div className="relative shrink-0">
-            <img src={Profile} alt="Zeeshan" className="h-10 w-10 rounded-full object-cover" />
+          <Avatar src={Profile} alt="Zeeshan">
             <div className={['absolute flex h-4 w-4 items-center justify-center rounded-full bg-gray-900 text-white ring-1 ring-white', isCollapsed ? '-left-1 top-0' : '-left-1.5 top-1.5'].join(' ')}>
               <Crown size={10} strokeWidth={2} />
             </div>
-          </div>
+          </Avatar>
 
           <div className={isCollapsed ? 'hidden' : 'flex min-w-0 flex-1 items-center justify-between'}>
             <div className="min-w-0 overflow-hidden">
